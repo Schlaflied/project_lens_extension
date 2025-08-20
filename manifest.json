@@ -1,0 +1,38 @@
+{
+    "manifest_version": 3,
+    "name": "Project Lens",
+    "description": "AI-powered company culture and risk analysis for job seekers. (AI 驱动的公司文化及风险分析工具)",
+    "version": "2.0",
+    "permissions": [
+      "storage",
+      "activeTab"
+    ],
+    "host_permissions": [
+      "https://project-lens-backend-885033581194.us-central1.run.app/*"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "css": ["content.css"],
+        "run_at": "document_start"
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["sidebar.html", "sidebar.css", "sidebar.js", "lib/*"],
+        "matches": [ "<all_urls>" ]
+      }
+    ],
+    "action": {
+      "default_title": "Project Lens (职场透镜)"
+    },
+    "icons": {
+      "16": "icons/16x16.png",
+      "48": "icons/48x48.png",
+      "128": "icons/128x128.png"
+    }
+}

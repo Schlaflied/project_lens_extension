@@ -1,0 +1,70 @@
+/* content.css - Styling for the new, smaller floating button */
+
+#project-lens-trigger-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    /* 【核心升级】尺寸缩小，参考ChatGPT悬浮球 */
+    width: 48px;
+    height: 48px;
+    background-color: #9b59b6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 2147483646;
+    transition: transform 0.2s ease-in-out, background-color 0.2s;
+}
+
+#project-lens-trigger-button:hover {
+    transform: scale(1.1);
+    background-color: #8e44ad;
+}
+
+.pl-main-icon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pl-main-icon svg {
+    color: white;
+    /* 【核心升级】图标也相应缩小 */
+    width: 22px;
+    height: 22px;
+}
+
+.pl-close-icon {
+    position: absolute;
+    /* 【核心升级】调整关闭按钮的位置和大小 */
+    top: -4px;
+    right: -4px;
+    width: 20px;
+    height: 20px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.pl-close-icon svg {
+    color: white;
+    /* 【核心升级】关闭图标也缩小 */
+    width: 12px;
+    height: 12px;
+    stroke-width: 3;
+}
+
+#project-lens-trigger-button:hover .pl-close-icon {
+    opacity: 1;
+    transform: scale(1);
+}
