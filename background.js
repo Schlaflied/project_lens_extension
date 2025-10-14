@@ -1,9 +1,9 @@
 // background.js - The central command and context menu manager
-// Version 25.0 - Robust Fetch & Error Handling
+// Version 25.1 - Bulletproof Response Handling
 
 const API_URL = 'https://project-lens-backend-885033581194.us-central1.run.app/analyze';
 
-// --- Context Menu Setup ---
+// --- Context Menu Setup (No change) ---
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
         id: "project-lens-analyze",
@@ -30,32 +30,35 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             body: JSON.stringify(message.data),
         })
         .then(async (response) => {
-            // 【核心升级】This is a more robust way to handle all responses from our backend.
+            // --- ✨ 核心修正：更稳健的响应处理 ---
             const result = {
                 ok: response.ok,
                 status: response.status,
                 data: null
             };
+            // 1. 总是先获取原始文本，这几乎不会失败
+            const responseText = await response.text();
             try {
-                // Our backend sends JSON for both success and known errors (like 429)
-                result.data = await response.json();
+                // 2. 尝试将文本解析为JSON
+                result.data = JSON.parse(responseText);
             } catch (e) {
-                // This catches network errors or if the server sends non-JSON response
-                result.data = { error: 'parse_error', message: 'Failed to parse server response.' };
+                // 3. 如果解析失败，说明响应不是JSON（比如一个纯文本错误）
+                //    我们就把原始文本作为错误消息
+                result.data = { error: 'parse_error', message: responseText };
             }
             return result;
         })
         .then(result => {
-             // Forward the structured result object (success or error) to the sidebar
+             // 将结构化的结果对象（无论成功或失败）转发给侧边栏
             chrome.runtime.sendMessage({ type: "ANALYSIS_RESULT", result: result });
         })
         .catch(error => {
-            // This now primarily catches true network failures
+            // 这里现在只捕获真正的网络故障
             console.error("API Fetch/Network Error:", error);
-            const errorResult = { ok: false, data: { error: "connection_error", message: error.toString() } };
+            const errorResult = { ok: false, status: 0, data: { error: "connection_error", message: error.toString() } };
             chrome.runtime.sendMessage({ type: "ANALYSIS_RESULT", result: errorResult });
         });
-        return true; // Indicates an asynchronous response
+        return true; // 表示异步响应
     }
 
     if (message.type === "OPEN_NEW_TAB") {
