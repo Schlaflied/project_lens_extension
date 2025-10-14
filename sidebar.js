@@ -1,5 +1,5 @@
 // sidebar.js - The new intelligent core for the extension
-// Version: 26.0 - Web App Feature Sync
+// Version: 26.1 - Web App Feature Sync & Robust Errors
 
 // --- 1. 元素获取 ---
 const smartPasteBox = document.getElementById('smart-paste-box');
@@ -292,13 +292,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             sourcesData = result.data.sources;
             renderReport();
         } else {
-            let errorMessage = t.connection_error;
-            // ✨ 核心修正：读取后端返回的动态错误信息
-            if (result.status === 429 && result.data && result.data.message) {
-                errorMessage = result.data.message;
-            } else if (result.data && result.data.error === 'no_info_found') {
+            // --- ✨ 核心修正：更简洁、更可靠的错误显示 ---
+            // 优先使用后端返回的消息，如果没有，则使用通用的连接错误消息
+            let errorMessage = (result.data && result.data.message) 
+                               ? result.data.message 
+                               : t.connection_error;
+
+            // 特殊情况覆盖：如果是“未找到信息”，则使用特定的本地化文案
+            if (result.data && result.data.error === 'no_info_found') {
                 errorMessage = t.no_info_found;
             }
+            
             resultContainer.innerHTML = `<h2 style="color: var(--danger-color);">Error</h2><p style="white-space: pre-wrap;">${errorMessage}</p>`;
         }
 
@@ -350,3 +354,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     makeResizable();
 });
+
