@@ -2,10 +2,11 @@
     "manifest_version": 3,
     "name": "Project Lens",
     "description": "AI-powered company culture and risk analysis for job seekers. (AI 驱动的公司文化及风险分析工具)",
-    "version": "2.0",
+    "version": "3.0",
     "permissions": [
       "storage",
-      "activeTab"
+      "activeTab",
+      "contextMenus"
     ],
     "host_permissions": [
       "https://project-lens-backend-885033581194.us-central1.run.app/*"
@@ -18,7 +19,7 @@
         "matches": ["<all_urls>"],
         "js": ["content.js"],
         "css": ["content.css"],
-        "run_at": "document_start"
+        "run_at": "document_end"
       }
     ],
     "web_accessible_resources": [
