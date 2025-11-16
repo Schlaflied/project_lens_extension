@@ -6,12 +6,12 @@ This is a sidebar extension built for Chromium-based browsers (Chrome, Edge). De
 
 ## 核心功能 / Core Features
 
-* **情境式激活 / Contextual Activation:** 扩展会在 **LinkedIn, Indeed, Glassdoor** 等主流求职网站上自动激活，并注入一个浮动的、可拖动的指南针按钮。
-* **一键分析 / One-Click Analysis:** 在支持的网站上，点击浮动按钮或页面中的“🔬 Analyze”集成按钮，即可自动抓取当前职位信息并填充到侧边栏。
-* **划词分析 / Context Menu Analysis:** 用户可以在任何网页上划选公司信息或文本，通过右键菜单直接调用插件进行分析。
-* **可定制 UI / Customizable UI:** 提供一个可调整大小（Resizer）的侧边栏面板，用于输入信息和切换语言/主题。
-* **AI 报告与引用 / AI Reporting & Citation:** 插件连接到 Project Lens 后端 API，获取 Gemini 生成的详细报告，包括红旗风险、文化契合度和引用来源。
-* **稳健的后台 / Robust Background:** `background.js` 采用优化的异步处理，确保即使在网络或 API 错误时，也能向侧边栏返回清晰的错误信息。
+* **情境式激活 / Contextual Activation:** 扩展会在 **LinkedIn, Indeed, Glassdoor** 等主流求职网站上自动激活，并注入一个浮动的、可拖动的指南针按钮。/ The extension automatically activates on major job sites like **LinkedIn, Indeed, and Glassdoor**, injecting a floating, draggable compass button.
+* **一键分析 / One-Click Analysis:** 在支持的网站上，点击浮动按钮或页面中的“🔬 Analyze”集成按钮，即可自动抓取当前职位信息并填充到侧边栏。/ On supported sites, clicking the floating button or the integrated "🔬 Analyze" button automatically scrapes the current job information and fills the sidebar.
+* **划词分析 / Context Menu Analysis:** 用户可以在任何网页上划选公司信息或文本，通过右键菜单直接调用插件进行分析。/ Users can highlight company information or text on any webpage and use the right-click context menu to launch the analysis directly.
+* **可定制 UI / Customizable UI:** 提供一个可调整大小（Resizer）的侧边栏面板，用于输入信息和切换语言/主题。/ Provides a resizable (Resizer) sidebar panel for inputting information and toggling language/theme settings.
+* **AI 报告与引用 / AI Reporting & Citation:** 插件连接到 Project Lens 后端 API，获取 Gemini 生成的详细报告，包括红旗风险、文化契合度和引用来源。/ The extension connects to the Project Lens backend API to fetch a detailed Gemini-generated report, including red flag risks, culture fit, and source citations.
+* **稳健的后台 / Robust Background:** `background.js` 采用优化的异步处理，确保即使在网络或 API 错误时，也能向侧边栏返回清晰的错误信息。/ The `background.js` uses optimized asynchronous processing to ensure clear error messages are returned to the sidebar even during network or API errors.
 
 ## 技术栈 / Tech Stack
 
